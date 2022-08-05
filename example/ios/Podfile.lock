@@ -1,0 +1,33 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_mob_sms (0.0.1):
+    - Flutter
+    - mob_smssdk
+  - mob_smssdk (3.3.2):
+    - MOBFoundation
+  - MOBFoundation (3.2.36)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_mob_sms (from `.symlinks/plugins/flutter_mob_sms/ios`)
+
+SPEC REPOS:
+  trunk:
+    - mob_smssdk
+    - MOBFoundation
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_mob_sms:
+    :path: ".symlinks/plugins/flutter_mob_sms/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_mob_sms: e5874c0d5e87954ea4cd689f78736fcb9c6e1721
+  mob_smssdk: 7dd38a9087980f9dfd74b9b25d87db36b38496c7
+  MOBFoundation: 78ad4264f436b3d147375ab7fdb8088b9e22ca5d
+
+PODFILE CHECKSUM: 1d62be80675f50e63eb2f851d55ee75f09951c1b
+
+COCOAPODS: 1.11.2
