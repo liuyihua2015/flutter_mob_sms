@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import MOBFoundation
 
 public class SwiftFlutterMobSmsPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -30,7 +31,13 @@ public class SwiftFlutterMobSmsPlugin: NSObject, FlutterPlugin {
     
       let arguments = call.arguments as? [String:String]
 
-      if "getTextCode" == call.method {
+      if "submitPolicyGrantResult" == call.method {
+        
+          MobSDK.uploadPrivacyPermissionStatus(true)
+          result("success")
+           print("submitPolicyGrantResult")
+
+      }else if "getTextCode" == call.method {
           print("\(arguments ?? [:])")
           SMSSDK.getVerificationCode(by: .SMS, phoneNumber: arguments?["phoneNumber"], zone: arguments?["zone"], template: arguments?["tempCode"], result: { error in
              var dict: [AnyHashable : Any] = [:]
@@ -38,6 +45,8 @@ public class SwiftFlutterMobSmsPlugin: NSObject, FlutterPlugin {
                  if let anError = self.error(toUZDict: error) {
                      dict["err"] = anError
                  }
+             }else{
+                dict["smart"] = true
              }
              result(dict)
          })
@@ -48,6 +57,8 @@ public class SwiftFlutterMobSmsPlugin: NSObject, FlutterPlugin {
                   if let anError = self.error(toUZDict: error) {
                       dict["err"] = anError
                   }
+              }else{
+                  dict["smart"] = true
               }
               result(dict)
           }
@@ -58,7 +69,9 @@ public class SwiftFlutterMobSmsPlugin: NSObject, FlutterPlugin {
                   if let anError = self.error(toUZDict: error) {
                       dict["err"] = anError
                   }
-              }
+              }else{
+                    dict["smart"] = true
+               }
               result(dict)
           }
       }else if "getSupportedCountries" == call.method {
@@ -77,7 +90,11 @@ public class SwiftFlutterMobSmsPlugin: NSObject, FlutterPlugin {
             result(dict)
           }
       }else if "getVersion" == call.method {
-            result(SMSSDK.sdkVersion)
+             var dict: [AnyHashable : Any] = [:]
+             var version: [AnyHashable : Any] = [:]
+             version["version"] = SMSSDK.sdkVersion()
+             dict["ret"] = version
+             result(dict)
       }else{
           result("no sms")
       }
